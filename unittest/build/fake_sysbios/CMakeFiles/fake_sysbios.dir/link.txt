@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfake_sysbios.a  CMakeFiles/fake_sysbios.dir/fake_ti_bios.c.o CMakeFiles/fake_sysbios.dir/fake_ti_knl_clock.c.o CMakeFiles/fake_sysbios.dir/fake_xdc_runtime_system.c.o
+/usr/bin/ranlib libfake_sysbios.a

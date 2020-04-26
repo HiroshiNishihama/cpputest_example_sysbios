@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Dxdc_target_types__=gnu/targets/std.h -Dxdc_target_name__=Linux86_64   CMakeFiles/test.out.dir/testRunner.cpp.o CMakeFiles/test.out.dir/test_clock.cpp.o CMakeFiles/test.out.dir/home/hiroshi/temp/sysbios_cpputest/clock/clock.c.o  -o test.out /usr/local/lib/libCppUTest.a /usr/local/lib/libCppUTestExt.a fake_sysbios/libfake_sysbios.a 

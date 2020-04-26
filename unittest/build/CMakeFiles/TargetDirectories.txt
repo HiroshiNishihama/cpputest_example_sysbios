@@ -1,0 +1,6 @@
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/CMakeFiles/rebuild_cache.dir
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/CMakeFiles/test.out.dir
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/CMakeFiles/edit_cache.dir
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/fake_sysbios/CMakeFiles/rebuild_cache.dir
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/fake_sysbios/CMakeFiles/fake_sysbios.dir
+/home/hiroshi/temp/sysbios_cpputest/unittest/build/fake_sysbios/CMakeFiles/edit_cache.dir
