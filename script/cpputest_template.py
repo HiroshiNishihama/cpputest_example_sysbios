@@ -95,6 +95,17 @@ def cat_fff_reset_func(node):
     return fake
 
 
+def output_stub_func(node):
+    stub = node.result_type.spelling + ' ' + node.displayname + '\n'
+    stub += '{\n'
+    if node.result_type.spelling != 'void':
+        stub += '\treturn 0;\n'
+    else:
+        stub += '\treturn;\n'
+    stub += '}\n'
+    return stub
+
+
 class PyCppUTest:
     '''
     CppUTestのTestHarnessを生成する
@@ -225,6 +236,29 @@ class PyCppUTest:
             fakes += [cat_fff_reset_func(func)]
         return fakes
 
+    def get_stub_function(self, srcfile, filterList=None):
+        '''
+        ソースコードからスタブ関数を生成する
+        Parameters
+        =============
+        srcfile     : string ソースコードファイル名
+        filterList  : string 生成する関数リスト
+
+        Returns
+        =============
+        stub        : スタブ関数のリスト
+        '''
+        code = self.extract_source_file(srcfile)
+        index = Index.create()
+        tu = index.parse(srcfile, unsaved_files=[(srcfile, code)])
+        func_node = get_function_decl_node(tu.cursor)
+        if filterList != None:
+            func_node = filter_function_decl_node(func_node, filterList)
+        stubs = []
+        for stub in func_node:
+            stubs += [output_stub_func(stub)]
+        return stubs
+
     def get_test_target_function(self, srcfile):
         '''
         ソースコードからテスト対象の関数リストを生成する
@@ -294,7 +328,8 @@ class PyCppUTest:
             s += '};\n'
 
             for test_case_name in test_targets:
-                s += 'TEST({0},{1})\n'.format(testname, 'TestCase_' + test_case_name)
+                s += 'TEST({0},{1})\n'.format(testname,
+                                              'TestCase_' + test_case_name)
                 s += '{\n\n'
                 s += '}\n\n'
 
@@ -314,3 +349,8 @@ if __name__ == '__main__':
     cpputest.add_include_path(
         'C:/ti/ccs1000/xdctools_3_61_00_16_core/packages')
     cpputest.generate_test_harness(sys.argv[1], sys.argv[2])
+
+    ref_functions = cpputest.get_external_refrence_function(sys.argv[1])
+    stubs = cpputest.get_stub_function(sys.argv[1], ref_functions)
+    for stub in stubs:
+        print(stub)
